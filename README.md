@@ -1,9 +1,7 @@
-This is the Next.js starter site (and course files) for the Next.js & Contentful tutorial by the Net Ninja.
+# OA Anime Blog
 
-## Getting Started
+This is a revamp for the Overanalyzing Anime (OA) blog site.
+Previously known as Comics Mostly, OA is a content creator who creates analysis based videos on various anime series. 
+This website was redesigned and developed by Asia Thompson. 
 
-To use the starter project, run the following in a terminal:
-
-```bash
-npx create-next-app [your-site-name] -e https://github.com/iamshaunjp/next-contentful/tree/lesson-1-starter-site
-```
+This project is built and maintained using Next.js, Tailwind, and Contentful. 

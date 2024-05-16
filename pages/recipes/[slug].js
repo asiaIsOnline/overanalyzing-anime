@@ -1,7 +1,7 @@
-export default function RecipeDetails() {
+export default function PostDetails() {
   return (
     <div>
-      Recipe Details
+      Post Details
     </div>
   )
 }

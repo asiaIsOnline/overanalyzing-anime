@@ -1,7 +1,7 @@
-export default function Recipes() {
+export default function Posts() {
   return (
-    <div className="recipe-list">
-      Recipe List
+    <div className="post-list">
+      Post List
     </div>
   )
 }
