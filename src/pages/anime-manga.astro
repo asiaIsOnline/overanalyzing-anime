@@ -2,18 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Nav from '../components/Nav.astro';
+import Socials from '../components/Socials.astro';
+import Footer from '../components/Footer.astro';
 
 const pageTitle="Anime & Manga"
 ---
 
 <Layout title={pageTitle}>
+	<Nav></Nav>
 	<main>
-        <Nav></Nav>
 		<h1>Anime & Manga</h1>
 		<ul>
             <li><a href="/posts/test-post">Test Post</a></li>
         </ul>
 	</main>
+	<Socials></Socials>
 </Layout>
 
 <style>
