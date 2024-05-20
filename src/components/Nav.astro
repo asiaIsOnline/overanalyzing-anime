@@ -1,17 +1,29 @@
 ---
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components'
 import OALogo from '../assets/OALogo.svg';
 ---
-<nav class="w-full flex justify-between text-slate-100">
-    <Image 
-        src={OALogo} 
-        alt="Overanalyzing Anime logo"
-        width="240"
-        height="120"
-    />
-    <div class="flex">
-        <a href="/">Home</a>
-        <a href="/anime-manga/">Anime & Manga</a>
-        <a href="/videogames/">Videogames</a>
+<nav class="w-full h-full flex justify-between text-slate-100">
+    <a href="/">
+        <Image 
+            src={OALogo} 
+            alt="Overanalyzing Anime logo"
+            width="240"
+            height="120"
+        />
+    </a>
+
+    <div class="flex gap-16">
+        <div class="flex flex-wrap content-center gap-12 text-base">
+            <a href="/anime-manga/">Anime & Manga</a>
+            <a href="/comics/">Comics</a>
+            <a href="/videogames/">Videogames</a>
+            <a href="/movies-tv/">Movies & TV</a>
+            <a href="/books/">Books</a>
+        </div>
+        <div class="flex flex-wrap content-center gap-8">
+            <Icon name="ph:sun" class="w-6 h-6"/>
+            <Icon name="tabler:search" class="w-5 h-5" />
+        </div>
     </div>
 </nav>

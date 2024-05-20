@@ -1,7 +1,9 @@
 ---
 import Nav from "../components/Nav.astro";
 ---
-<div class="w-full px-10 py-10 bg-gradient-to-b from-neutral-950 to-transparent bg-[url('../../src/assets/headerBkgd.jpeg')] bg-blend-overlay">
+<div class="w-screen px-32 py-10 bg-overlay" 
+    style="--overlay-image: url('../../src/assets/headerBkgd.png'); 
+    --overlay-colors: rgba(10, 10, 10, 1), rgba(10, 10, 10, 0.6);">
     <Nav></Nav>
     <p>Page Name</p>
 </div>
