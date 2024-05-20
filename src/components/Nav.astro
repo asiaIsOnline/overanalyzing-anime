@@ -1,7 +1,17 @@
 ---
+import { Image } from 'astro:assets';
+import OALogo from '../assets/OALogo.svg';
 ---
-<nav>
-    <a href="/">Home</a>
-    <a href="/anime-manga/">Anime & Manga</a>
-    <a href="/videogames/">Videogames</a>
+<nav class="w-full flex justify-between text-slate-100">
+    <Image 
+        src={OALogo} 
+        alt="Overanalyzing Anime logo"
+        width="240"
+        height="120"
+    />
+    <div class="flex">
+        <a href="/">Home</a>
+        <a href="/anime-manga/">Anime & Manga</a>
+        <a href="/videogames/">Videogames</a>
+    </div>
 </nav>
