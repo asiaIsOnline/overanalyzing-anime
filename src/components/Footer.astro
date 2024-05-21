@@ -2,13 +2,16 @@
 import { Icon } from 'astro-icon/components'
 import Socials from '../components/Socials.astro';
 ---
-<footer>
+<footer class="px-32 py-10 border-t-2 border-neutral-950 flex justify-between">
     <div>
-        <p>Follow or contact Overanalyzing Anime</p>
+        <p class="font-bold mb-2">Follow or contact Overanalyzing Anime</p>
         <Socials></Socials>
     </div>
     <div>
-        <p>Designed and developed by Asia</p>
-        <p><Icon name="ph:copyright" class="w-6 h-6"/>Overanalyzing Anime</p>
+        <p class="mb-2">Designed and developed by Asia</p>
+        <div class="flex items-center gap-2">
+            <Icon name="ph:copyright" class="w-4 h-4"/>
+            <p>Overanalyzing Anime</p>
+        </div>
     </div>
 </footer>
