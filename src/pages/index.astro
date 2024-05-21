@@ -1,17 +1,14 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import Card from '../components/Card.astro';
+import BlogPost from '../components/BlogPost.astro';
 
 const pageTitle = "Home"
 ---
 
 <PageLayout title={pageTitle}>
 	<section>
-		<h1 class="text-gradient">Welcome to OA Anime</h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
+		<h1 class="text-gradient">Welcome to Overanalyzing Anime</h1>
 		<ul role="list" class="link-card-grid">
 			<Card
 				href="https://docs.astro.build/"
@@ -34,6 +31,10 @@ const pageTitle = "Home"
 				body="Come say hi to our amazing Discord community. ❤️"
 			/>
 		</ul>
+		<BlogPost 
+			title="Example Blog Post"
+			body="Lorem ipsum dolor sit amet consectetur. Pellentesque dictum turpis sed at egestas. Facilisis eget sed posuere nulla morbi amet neque odio orci. Purus enim volutpat sapien adipiscing..."
+		/>
 	</section>
 </PageLayout>
 

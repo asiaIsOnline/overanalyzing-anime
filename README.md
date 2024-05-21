@@ -1,4 +1,4 @@
-# OA Anime Blog
+# Overanalyzing Anime Blog
 
 This is a revamp for the Overanalyzing Anime (OA) blog site.
 Previously known as Comics Mostly, OA is a content creator who creates analysis based videos on various anime series. 
