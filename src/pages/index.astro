@@ -1,12 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 import Header from '../components/Header.astro';
 import Card from '../components/Card.astro';
 
 const pageTitle = "Home"
 ---
 
-<Layout title={pageTitle}>
+<PageLayout title={pageTitle}>
 	<Header></Header>
 	<main>
 		<h1 class="text-gradient">Welcome to OA Anime</h1>
@@ -37,7 +37,7 @@ const pageTitle = "Home"
 			/>
 		</ul>
 	</main>
-</Layout>
+</PageLayout>
 
 <style>
 	main {

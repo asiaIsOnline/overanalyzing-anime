@@ -1,11 +1,15 @@
 ---
+import Footer from "../components/Footer.astro";
+
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
 ---
-<html>
+
+<!doctype html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -16,5 +20,37 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<slot />
+		<Footer></Footer>
 	</body>
 </html>
+<style is:global>
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+	html {
+		width: 100vw;
+		overflow-x: hidden;
+		font-family: system-ui, sans-serif;
+		background: #F7F7F7;
+		background-size: 224px;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+</style>
