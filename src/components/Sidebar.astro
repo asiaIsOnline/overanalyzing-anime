@@ -2,7 +2,62 @@
 import { Icon } from 'astro-icon/components'
 import Socials from '../components/Socials.astro';
 ---
-<aside>
-    <p>Connect & Support OA</p>
-    <Socials></Socials>
+<aside class="max-w-md border-l-2 border-neutral-950 pl-8 flex flex-col gap-10">
+    <div>
+        <p class="uppercase font-bold mb-4">Connect & Support OA</p>
+        <Socials></Socials>
+    </div>
+    <div>
+        <p class="uppercase font-bold mb-4">Patreon Over Analyzers</p>
+        <div>
+            <li>Cavarex XE</li>
+            <li>I Am The Blond Assh*le</li>
+            <li>Cmart</li>
+            <li>Croix Raiden</li>
+            <li>Joey Helbig</li>
+            <li>FrigidFox</li>
+            <li>Emilia</li>
+            <li>Asia Act Casual</li>
+        </div>
+    </div>
+    <div>
+        <p class="uppercase font-bold mb-4">Popular Posts</p>
+        <div>
+            <li>Over Analyzing Death Note Ep.26</li>
+            <li>Over Analyzing Code Geass Ep.1</li>
+            <li>Hunter x Hunter is on Hiatus. Again.</li>
+            <li>Full Metal Alchemist (2018): Minute Review</li>
+            <li>Dragon Ball Fighterz: Review</li>
+        </div>
+    </div>
+    <div>
+        <p class="uppercase font-bold mb-4">Recent Comments</p>
+        <div>
+            <li>Hugoina on Bleach (2018): G-B-U Review</li>
+            <li>Dante on True Villan of 'Man of Steel'</li>
+            <li>Themes on Infinity War First Trailer: Minute Review</li>
+            <li>Alyssa’s Notebook on The Circle: Minute Review</li>
+            <li>Elvis on “Suicide Notes”: Book Review</li>
+        </div>
+    </div>
+    <div>
+        <p class="uppercase font-bold mb-4">Categories</p>
+        <select>
+            <option value="volvo">Select Category</option>
+        </select>
+    </div>
+    <div>
+        <p class="uppercase font-bold mb-4">Archives</p>
+        <select>
+            <option value="volvo">Select Month</option>
+        </select>
+    </div>
+    <div>
+        <p class="uppercase font-bold mb-4">Subscribe</p>
+        <p>Enter your email address to subscribe to the blog and receive notifications for new posts.</p>
+        <form class="flex flex-col gap-2">
+            <input type="text" placeholder="Email Address">
+            <input type="submit" value="Subscribe" class="w-1/4 border-2">
+        </form>
+    </div>
 </aside>
