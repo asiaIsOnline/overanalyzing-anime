@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
 import Card from '../components/Card.astro';
-import Nav from '../components/Nav.astro';
 import Socials from '../components/Socials.astro';
 import Footer from '../components/Footer.astro';
 
@@ -9,7 +9,7 @@ const pageTitle="Anime & Manga"
 ---
 
 <Layout title={pageTitle}>
-	<Nav></Nav>
+	<Header heading={pageTitle}></Header>
 	<main>
 		<h1>Anime & Manga</h1>
 		<ul>
