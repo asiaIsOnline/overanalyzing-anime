@@ -1,12 +1,10 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import Header from '../components/Header.astro';
 
 const pageTitle="Movies & TV"
 ---
 
-<PageLayout title={pageTitle}>
-	<Header heading={pageTitle}></Header>
+<PageLayout title={pageTitle} pageHeader={pageTitle}>
 	<main>
 		<ul>
             <li><a href="/posts/test-post">Test Post</a></li>
