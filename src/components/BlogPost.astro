@@ -3,13 +3,54 @@ import { Icon } from 'astro-icon/components'
 
 interface Props {
 	title: string;
-	body: string;
+	body?: string;
+    author: string;
+    category: string;
+    tag: string;
+    commentNumber: number;
+    likeNumber: number;
 }
 
-const { title, body } = Astro.props;
+const { title, body, author, category, tag, commentNumber, likeNumber } = Astro.props;
 ---
 
-<div>
+<div class="w-3/5 mx-auto flex flex-col gap-2">
     <h2 class="text-3xl">{title}</h2>
+    <div class="flex gap-4">
+        <div class="flex items-center gap-2">
+            <Icon name="ph:calendar-dots-fill" class="w-6 h-6"/>
+            <p>Month, Day, Year</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <Icon name="ph:user-circle-fill" class="w-6 h-6"/>
+            <p>{author}</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <Icon name="ph:clock-fill" class="w-6 h-6"/>
+            <p>3 min.</p>
+        </div>
+    </div>
     <p>{body}</p>
+    <div class="flex justify-between">
+        <div  class="flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+                <Icon name="ph:folder-open-fill" class="w-6 h-6"/>
+                <p>{category}</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <Icon name="ph:tag-fill" class="w-6 h-6"/>
+                <p>{tag}</p>
+            </div>
+        </div>
+        <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+                <Icon name="ph:chat-circle-dots-fill" class="w-6 h-6"/>
+                <p>{commentNumber} Comments</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <Icon name="ph:heart-fill" class="w-6 h-6"/>
+                <p>{likeNumber} Likes</p>
+            </div>
+        </div>
+    </div>
 </div>
