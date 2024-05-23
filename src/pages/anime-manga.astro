@@ -1,16 +1,17 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import Header from '../components/Header.astro';
+import BlogPost from '../components/BlogPost.astro';
 
 const pageTitle="Anime & Manga"
 ---
 
 <PageLayout title={pageTitle} pageHeader={pageTitle}>
-	<main>
-		<ul>
-            <li><a href="/posts/test-post">Test Post</a></li>
-        </ul>
-	</main>
+	<section>
+		<BlogPost 
+		title="Example Blog Post"
+		body="Lorem ipsum dolor sit amet consectetur. Pellentesque dictum turpis sed at egestas. Facilisis eget sed posuere nulla morbi amet neque odio orci. Purus enim volutpat sapien adipiscing..."
+		/>
+	</section>
 </PageLayout>
 
 <style>
