@@ -4,6 +4,7 @@ import { Icon } from 'astro-icon/components'
 interface Props {
 	title: string;
     slug?:string;
+    publishDate: string;
 	body?: string;
     author: string;
     category: string;
@@ -12,17 +13,17 @@ interface Props {
     likeNumber: number;
 }
 
-const { title, slug, body, author, category, tag, commentNumber, likeNumber } = Astro.props;
+const { title, slug, publishDate, body, author, category, tag, commentNumber, likeNumber } = Astro.props;
 ---
 
-<div class="w-3/5 mx-auto flex flex-col gap-2">
+<div class="w-full mx-auto flex flex-col gap-2">
     <a href={slug}>
         <h2 class="text-3xl">{title}</h2>
     </a>
     <div class="flex gap-4">
         <div class="flex items-center gap-2">
             <Icon name="ph:calendar-dots-fill" class="w-6 h-6"/>
-            <p>Month, Day, Year</p>
+            <p>{publishDate}</p>
         </div>
         <div class="flex items-center gap-2">
             <Icon name="ph:user-circle-fill" class="w-6 h-6"/>

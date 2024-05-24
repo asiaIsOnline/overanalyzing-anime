@@ -9,25 +9,45 @@ const client = new GraphQLClient(import.meta.env.HYGRAPH_ENDPOINT);
 // Declare Post type
 type Posts = {
 	posts: {
-		title: string;
 		slug: string; 
-		publishDate: string;
-		likes: number;
+		title: string;
 		body: {
 			text: string;
 		};
+		likes: number;
+		postAuthor: {
+			postAuthor: string;
+		}
+		postCategories: {
+			categoryName: string;
+		}
+		postTags: {
+			tagName: string;
+		}
+		publishDate: string;
 	}[];
 };
 
 //GraphQL query to fetch data
 const { posts }: Posts = await client.request(`
 query AllRecentPosts {
-  posts(orderBy: publishDate_ASC) {
+  posts(orderBy: publishDate_DESC) {
     slug
     title
     body {
       text
     }
+    likes
+    postAuthor {
+      postAuthor
+    }
+    postCategories {
+      categoryName
+    }
+    postTags {
+      tagName
+    }
+    publishDate
   }
 }
 `)
@@ -36,55 +56,44 @@ const pageTitle = "Home"
 ---
 
 <PageLayout title={pageTitle}>
-	<section class="flex flex-col gap-20">
-		<ul>
+	<section>
+		<ul class="flex flex-col gap-16">
 			{
 			  posts.map((post: any) => {
 				return (
-					<li class="ex ">
+					<li>
 						<BlogPost 
 							title={post.title}
 							slug={`/page/${post.slug}`}
-							author="O.A."
-							category="Anime & Manga"
-							tag="Dragonball"
+							publishDate={post.publishDate}
+							author={post.postAuthor.postAuthor}
+							category={
+									
+								post.postCategories.map(function(element: { categoryName: string }, index: number, array: { categoryName: string }[]){
+									if (index == array.length -1) {
+										return `${element.categoryName}`
+									} else {
+										return `${element.categoryName}, `
+									}
+								})
+							}
+							tag={
+								post.postTags.map(function(element: { tagName: string }, index: number, array: { tagName: string }[]){
+									if (index == array.length -1) {
+										return `${element.tagName}`
+									} else {
+										return `${element.tagName}, `
+									}
+								})
+							}
 							commentNumber={0}
-							likeNumber={0}
+							likeNumber={post.likes}
 						/>
 					</li>
 				);
 			  })
 			}
 		  </ul>
-
-		<BlogPost 
-		title="Example Blog Post"
-		author="O.A."
-		category="Anime & Manga"
-		tag="Dragonball"
-		commentNumber={0}
-		likeNumber={0}
-		/>
-
-		<BlogPost 
-			title="Example Blog Post"
-			body="Lorem ipsum dolor sit amet consectetur. Pellentesque dictum turpis sed at egestas. Facilisis eget sed posuere nulla morbi amet neque odio orci. Purus enim volutpat sapien adipiscing..."
-			author="O.A."
-			category="Anime & Manga"
-			tag="Dragonball"
-			commentNumber={0}
-			likeNumber={0}
-		/>
-
-		<BlogPost 
-			title="Example Blog Post"
-			body="Lorem ipsum dolor sit amet consectetur. Pellentesque dictum turpis sed at egestas. Facilisis eget sed posuere nulla morbi amet neque odio orci. Purus enim volutpat sapien adipiscing..."
-			author="O.A."
-			category="Anime & Manga"
-			tag="Dragonball"
-			commentNumber={0}
-			likeNumber={0}
-		/>
 	</section>
 </PageLayout>
 
