@@ -1,5 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 
 interface Props {
 	title: string;
@@ -11,9 +12,11 @@ interface Props {
     tag: string;
     commentNumber: number;
     likeNumber: number;
+    imageURL?: string;
+    videoURL?: string;
 }
 
-const { title, slug, publishDate, body, author, category, tag, commentNumber, likeNumber } = Astro.props;
+const { title, slug, publishDate, body, author, category, tag, commentNumber, likeNumber, imageURL, videoURL } = Astro.props;
 ---
 
 <div class="w-full mx-auto flex flex-col gap-2">

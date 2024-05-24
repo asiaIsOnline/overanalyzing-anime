@@ -11,7 +11,7 @@ type Posts = {
 	posts: {
 		slug: string; 
 		title: string;
-		body: {
+		body?: {
 			text: string;
 		};
 		likes: number;
@@ -25,6 +25,12 @@ type Posts = {
 			tagName: string;
 		}
 		publishDate: string;
+		image?: {
+			url: string;
+		}
+		video?: {
+			url: string;
+		}
 	}[];
 };
 
@@ -49,6 +55,12 @@ query AllRecentPosts {
     }
     publishDate
   }
+  image {
+	url
+  }
+  video {
+	url
+  }
 }
 `)
 
@@ -68,7 +80,6 @@ const pageTitle = "Home"
 							publishDate={post.publishDate}
 							author={post.postAuthor.postAuthor}
 							category={
-									
 								post.postCategories.map(function(element: { categoryName: string }, index: number, array: { categoryName: string }[]){
 									if (index == array.length -1) {
 										return `${element.categoryName}`
@@ -86,6 +97,7 @@ const pageTitle = "Home"
 									}
 								})
 							}
+							imageURL={post.image.url}
 							commentNumber={0}
 							likeNumber={post.likes}
 						/>
