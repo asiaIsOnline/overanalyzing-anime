@@ -23,7 +23,7 @@ const { title, pageHeader} = Astro.props;
 	</head>
 	<body>
 		<Header heading={pageHeader}></Header>
-		<main class="px-32 py-10 flex justify-center gap-20">
+		<main class="px-32 py-10 flex justify-around gap-20">
 			<slot />
 			<Sidebar></Sidebar>
 		</main>

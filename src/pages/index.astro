@@ -29,10 +29,7 @@ type Posts = {
 			url: string | null;
 			altText: string | null;
 		}
-		video?: {
-			url: string | null;
-			altText: string| null;
-		}
+		videoLink: string;
 	}[];
 };
 
@@ -60,10 +57,7 @@ const allRecentPosts = `
 				url
 				altText
 				}
-			video {
-				url
-				altText
-				}
+			videoLink
 		}
 	}`
 
@@ -114,6 +108,7 @@ const pageTitle = "Home"
 									return `${element.altText}`
 								})
 							}
+							videoURL={post.videoLink}
 						/>
 					</li>
 				);

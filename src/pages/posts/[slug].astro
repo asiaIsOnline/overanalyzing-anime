@@ -1,7 +1,7 @@
 ---
 import { GraphQLClient } from "graphql-request";
 import type { GetStaticPaths } from "astro";
-import { string } from "astro/zod";
+import PostLayout from "../../layouts/PostLayout.astro";
 
 type Posts = {
     posts: {
@@ -42,5 +42,7 @@ const { post } = Astro.props
 
 ---
 
-<h1>{post.title}</h1>
-<div set:html={post.body.html}></div>
+<PostLayout title={post.title}>
+    <h1>{post.title}</h1>
+    <div set:html={post.body.html}></div>
+</PostLayout>
