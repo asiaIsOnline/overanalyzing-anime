@@ -13,10 +13,22 @@ interface Props {
     commentNumber: number;
     likeNumber: number;
     imageURL?: string;
+    imageAltText?: string;
     videoURL?: string;
 }
 
-const { title, slug, publishDate, body, author, category, tag, commentNumber, likeNumber, imageURL, videoURL } = Astro.props;
+const { title, 
+        slug, 
+        publishDate, 
+        body, 
+        author, 
+        category, 
+        tag, 
+        commentNumber, 
+        likeNumber, 
+        imageURL, 
+        imageAltText,
+        videoURL } = Astro.props;
 ---
 
 <div class="w-full mx-auto flex flex-col gap-2">
@@ -37,6 +49,7 @@ const { title, slug, publishDate, body, author, category, tag, commentNumber, li
             <p>3 min.</p>
         </div>
     </div>
+    <img src={imageURL} alt={imageAltText}/>
     <p>{body}</p>
     <div class="flex justify-between">
         <div  class="flex flex-col gap-2">

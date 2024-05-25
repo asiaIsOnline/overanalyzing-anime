@@ -26,37 +26,48 @@ type Posts = {
 		}
 		publishDate: string;
 		image?: {
-			url: string;
+			url: string | null;
+			altText: string | null;
 		}
 		video?: {
-			url: string;
+			url: string | null;
+			altText: string| null;
 		}
 	}[];
 };
 
 //GraphQL query to fetch data
-const { posts }: Posts = await client.request(`
-query AllRecentPosts {
-  posts(orderBy: publishDate_DESC) {
-    slug
-    title
-    body {
-      text
-    }
-    likes
-    postAuthor {
-      postAuthor
-    }
-    postCategories {
-      categoryName
-    }
-    postTags {
-      tagName
-    }
-    publishDate
-	}
-}
-`)
+const allRecentPosts = `
+	query AllRecentPosts {
+		posts(orderBy: publishDate_DESC) {
+			slug
+			title
+			body {
+				html
+				}
+			likes
+			postAuthor {
+				postAuthor
+				}
+			postCategories {
+				categoryName
+				}
+			postTags {
+				tagName
+				}
+			publishDate
+			image {
+				url
+				altText
+				}
+			video {
+				url
+				altText
+				}
+		}
+	}`
+
+const { posts }: Posts = await client.request(allRecentPosts)
 
 const pageTitle = "Home"
 ---
@@ -93,6 +104,16 @@ const pageTitle = "Home"
 							}
 							commentNumber={0}
 							likeNumber={post.likes}
+							imageURL={
+								post.image.map(function(element: { url: string, altText: string }, index: number, array: { url: string, altText: string }[]){
+									return `${element.url}`
+								})
+							}
+							imageAltText={
+								post.image.map(function(element: { url: string, altText: string }, index: number, array: { url: string, altText: string }[]){
+									return `${element.altText}`
+								})
+							}
 						/>
 					</li>
 				);
