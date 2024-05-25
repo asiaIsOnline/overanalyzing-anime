@@ -1,0 +1,46 @@
+---
+import { GraphQLClient } from "graphql-request";
+import type { GetStaticPaths } from "astro";
+import { string } from "astro/zod";
+
+type Posts = {
+    posts: {
+        slug: string;
+        title: string;
+        body?: {
+            text: string;
+        }
+    }[];
+}
+
+export const getStaticPaths = (async () => {
+    const client = new GraphQLClient(import.meta.env.HYGRAPH_ENDPOINT)
+
+    const allPostsQuery = `
+    query AllPosts {
+            posts {
+                title
+                slug
+                body {
+                    html
+                }
+            }
+        }`
+
+
+    const {posts}: Posts = await client.request(allPostsQuery)
+
+    return posts.map ( (post: any) => ({
+        params: {
+            slug: post.slug
+        },
+        props: { post }
+    }) )
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props
+
+---
+
+<h1>{post.title}</h1>
+<div set:html={post.body.html}></div>
