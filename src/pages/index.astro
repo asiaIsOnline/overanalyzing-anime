@@ -2,6 +2,7 @@
 import { GraphQLClient } from "graphql-request";
 import PageLayout from '../layouts/PageLayout.astro';
 import BlogPost from '../components/BlogPost.astro';
+import MorePostsButton from "../components/MorePostsButton";
 
 // New GraphQL client with Hygraph endpoint
 const client = new GraphQLClient(import.meta.env.HYGRAPH_ENDPOINT);
@@ -149,7 +150,7 @@ const pageTitle = "Home"
 		  </ul>
 
 		  {
-			pages.pageInfo.hasNextPage && <h1>See More</h1>
+			pages.pageInfo.hasNextPage && <MorePostsButton />
 		  }
 	</section>
 </PageLayout>
