@@ -6,7 +6,21 @@ import BlogPost from '../components/BlogPost.astro';
 // New GraphQL client with Hygraph endpoint
 const client = new GraphQLClient(import.meta.env.HYGRAPH_ENDPOINT);
 
+// Define the number of posts loaded per page
+const pageSize = 10;
+
 // Declare Posts type
+type Pages = {
+	postsArray: {
+		cursor: string;
+		posts: Posts;
+	}[];
+	pageInfo: {
+		endCursor: string;
+		hasNextPage: boolean;
+	}
+}
+
 type Posts = {
 	posts: {
 		slug: string; 
@@ -35,35 +49,50 @@ type Posts = {
 };
 
 //GraphQL query to fetch data
-const allRecentPosts = `
-	query AllRecentPosts {
-		posts(orderBy: publishDate_DESC) {
-			slug
-			title
-			body {
-				html
-				}
-			likes
-			postAuthor {
-				postAuthor
-				}
-			postCategories {
-				categoryName
-				}
-			postTags {
-				tagName
-				}
-			publishDate
-			image {
-				url
-				altText
-				}
-			videoLink
-			videoToggle
+const paginationQuery = `
+	query paginationQuery($size: Int) {
+		pages: postsConnection(first: $size, orderBy: publishDate_DESC) {
+			postsArray: edges {
+				cursor
+				posts: node {
+					title
+					slug
+					body {
+						html
+						}
+					likes
+					postAuthor {
+						postAuthor
+						}
+					postCategories {
+						categoryName
+						}
+					postTags {
+						tagName
+						}
+					publishDate
+					image {
+						altText
+						url
+						}
+					videoLink
+					videoToggle
+					}
+			}
+			pageInfo {
+				endCursor
+				hasNextPage
+			}
 		}
 	}`
 
-const { posts }: Posts = await client.request(allRecentPosts)
+const { pages } : any = await client.request(paginationQuery, { size: pageSize })
+
+/*
+console.log(pages.postsArray.map((post) => {
+	return post.posts
+}))
+*/
 
 const pageTitle = "Home"
 ---
@@ -72,16 +101,16 @@ const pageTitle = "Home"
 	<section>
 		<ul class="flex flex-col gap-16">
 			{
-			  posts.map((post: any) => {
+			  pages.postsArray.map((posts: any) => {
 				return (
 					<li>
 						<BlogPost 
-							title={post.title}
-							slug={post.slug}
-							publishDate={post.publishDate}
-							author={post.postAuthor.postAuthor}
+							title={posts.posts.title}
+							slug={posts.posts.slug}
+							publishDate={posts.posts.publishDate}
+							author={posts.posts.postAuthor.postAuthor}
 							category={
-								post.postCategories.map(function(element: { categoryName: string }, index: number, array: { categoryName: string }[]){
+								posts.posts.postCategories.map(function(element: { categoryName: string }, index: number, array: { categoryName: string }[]){
 									if (index == array.length -1) {
 										return `${element.categoryName}`
 									} else {
@@ -90,7 +119,7 @@ const pageTitle = "Home"
 								})
 							}
 							tag={
-								post.postTags.map(function(element: { tagName: string }, index: number, array: { tagName: string }[]){
+								posts.posts.postTags.map(function(element: { tagName: string }, index: number, array: { tagName: string }[]){
 									if (index == array.length -1) {
 										return `${element.tagName}`
 									} else {
@@ -99,25 +128,29 @@ const pageTitle = "Home"
 								})
 							}
 							commentNumber={0}
-							likeNumber={post.likes}
+							likeNumber={posts.posts.likes}
 							imageURL={
-								post.image.map(function(element: { url: string, altText: string }, index: number, array: { url: string, altText: string }[]){
+								posts.posts.image.map(function(element: { url: string, altText: string }, index: number, array: { url: string, altText: string }[]){
 									return `${element.url}`
 								})
 							}
 							imageAltText={
-								post.image.map(function(element: { url: string, altText: string }, index: number, array: { url: string, altText: string }[]){
+								posts.posts.image.map(function(element: { url: string, altText: string }, index: number, array: { url: string, altText: string }[]){
 									return `${element.altText}`
 								})
 							}
-							videoURL={post.videoLink}
-							videoToggle={post.videoToggle}
+							videoURL={posts.posts.videoLink}
+							videoToggle={posts.posts.videoToggle}
 						/>
 					</li>
 				);
 			  })
 			}
 		  </ul>
+
+		  {
+			pages.pageInfo.hasNextPage && <h1>See More</h1>
+		  }
 	</section>
 </PageLayout>
 
