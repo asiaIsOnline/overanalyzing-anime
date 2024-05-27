@@ -1,9 +1,5 @@
-
-function MorePostsButton() {
-
-    return (
-        <h1>See More Posts</h1>
-    )
+function MorePostsButton {
+    
 }
 
 export default MorePostsButton
