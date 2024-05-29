@@ -65,14 +65,14 @@ function MoreBlogPosts({currentCursor, size=4, HYGRAPH_ENDPOINT}) {
                 })
             
             const result = await response.json();
-            setLoading(false)
             console.log(result)
 
             if (result.error) {
                 throw new Error(result.errors[0].message)
             }
         } catch (error) {
-            setError(error.message);
+            console.error(error.message);
+        } finally { 
             setLoading(false);
         }
     }
