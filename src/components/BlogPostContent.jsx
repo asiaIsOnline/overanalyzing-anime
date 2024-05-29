@@ -8,8 +8,7 @@ import { PiCalendarDotFill,
 
 const BlogPostContent = ({post}) => {
 
-    const {title, 
-            slug, 
+    const {
             publishDate, 
             body, 
             author, 
@@ -22,12 +21,11 @@ const BlogPostContent = ({post}) => {
             videoURL,
             videoToggle} = post
 
-    console.log(slug)
+    //console.log(body.html)
+    //<p className="h-8 text-ellipsis" dangerouslySetInnerHTML={{__html: body.html}}></p>
+
     return (
         <>
-            <a> href={`/posts/${slug}`}
-                <h2 className="text-3xl">{title}</h2>
-            </a>
             <div className="flex gap-4">
                 <div className="flex items-center gap-2">
                     <PiCalendarDotFill className="w-6 h-6"/>
@@ -46,7 +44,6 @@ const BlogPostContent = ({post}) => {
             videoToggle ? <iframe width="640" height="360" src={videoURL} title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> : 
             <img src={imageURL} alt={imageAltText} width="640" height="360"/>
             }
-            <p className="h-8 text-ellipsis"></p>
             <div className="flex justify-between">
                 <div class="w-4/5 flex flex-col gap-2">
                     <div className="flex items-center gap-2">

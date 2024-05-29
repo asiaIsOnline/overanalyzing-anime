@@ -92,44 +92,7 @@ function MoreBlogPosts({currentCursor, size=4, HYGRAPH_ENDPOINT}) {
             {
             posts.map((posts) => {
                 <li key={posts.cursor}>
-                    <BlogPost
-                        title={posts.posts.title}
-                        slug={posts.posts.slug}
-                        publishDate={posts.posts.publishDate}
-                        author={posts.posts.postAuthor.postAuthor}
-                        category={
-                            posts.posts.postCategories.map(function(element, index, array){
-                                if (index == array.length -1) {
-                                    return `${element.categoryName}`
-                                } else {
-                                    return `${element.categoryName}, `
-                                }
-                            })
-                        }
-                        tag={
-                            posts.posts.postTags.map(function(element, index, array){
-                                if (index == array.length -1) {
-                                    return `${element.tagName}`
-                                } else {
-                                    return `${element.tagName}, `
-                                }
-                            })
-                        }
-                        commentNumber={0}
-                        likeNumber={posts.posts.likes}
-                        imageURL={
-                            posts.posts.image.map(function(element){
-                                return `${element.url}`
-                            })
-                        }
-                        imageAltText={
-                            posts.posts.image.map(function(element){
-                                return `${element.altText}`
-                            })
-                        }
-                        videoURL={posts.posts.videoLink}
-                        videoToggle={posts.posts.videoToggle}
-                    />
+                    <BlogPost post={posts.posts}/>
                 </li>
                 })
             }
