@@ -105,44 +105,7 @@ const pageTitle = "Home"
 			  pages.postsArray.map((posts: any) => {
 				return (
 					<li>
-						<BlogPost 
-							title={posts.posts.title}
-							slug={posts.posts.slug}
-							publishDate={posts.posts.publishDate}
-							author={posts.posts.postAuthor.postAuthor}
-							category={
-								posts.posts.postCategories.map(function(element: { categoryName: string }, index: number, array: { categoryName: string }[]){
-									if (index == array.length -1) {
-										return `${element.categoryName}`
-									} else {
-										return `${element.categoryName}, `
-									}
-								})
-							}
-							tag={
-								posts.posts.postTags.map(function(element: { tagName: string }, index: number, array: { tagName: string }[]){
-									if (index == array.length -1) {
-										return `${element.tagName}`
-									} else {
-										return `${element.tagName}, `
-									}
-								})
-							}
-							commentNumber={0}
-							likeNumber={posts.posts.likes}
-							imageURL={
-								posts.posts.image.map(function(element: { url: string, altText: string }, index: number, array: { url: string, altText: string }[]){
-									return `${element.url}`
-								})
-							}
-							imageAltText={
-								posts.posts.image.map(function(element: { url: string, altText: string }, index: number, array: { url: string, altText: string }[]){
-									return `${element.altText}`
-								})
-							}
-							videoURL={posts.posts.videoLink}
-							videoToggle={posts.posts.videoToggle}
-						/>
+						<BlogPost post={posts.posts}/>
 					</li>
 				);
 			  })
@@ -154,13 +117,3 @@ const pageTitle = "Home"
 		  }
 	</section>
 </PageLayout>
-
-<style>
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
-	}
-</style>
