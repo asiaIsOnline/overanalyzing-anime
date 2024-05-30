@@ -43,8 +43,6 @@ function MoreBlogPosts({currentCursor, size=4, HYGRAPH_ENDPOINT}) {
     const [cursor, setCursor] = useState(currentCursor)
     const [hasNext, setHasNext] = useState(true)
     const [loading, setLoading] = useState(false)
-    
-    console.log('in the browser')
 
     const getMorePosts = async () => {
         
