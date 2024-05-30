@@ -1,5 +1,4 @@
 import { useState } from "react"
-import BlogPost from "./BlogPost.astro"
 
 const moreBlogQuery = `
 query moreBlogQuery($cursor: String!, $size: Int!) {
@@ -90,7 +89,7 @@ function MoreBlogPosts({currentCursor, size=4, HYGRAPH_ENDPOINT}) {
             {
             posts.map((posts) => {
                 <li key={posts.cursor}>
-                    <BlogPost post={posts.posts}/>
+
                 </li>
                 })
             }

@@ -28,14 +28,12 @@ const BlogPostContent = ({post}) => {
             )         
         } else {
             return (
-                image.map(function(img) {
-                    <img src={img.url} alt={img.altText} width="640" height="360"/>
-                })
+                <img src={image[0].url} alt={image[0].altText} width="640" height="360"/>
             )
         }
     }
     
-    console.log(image[0].url)
+    //console.log(image[0].url)
     //{videoOrBlog(videoToggle)}
     //<p className="h-8 text-ellipsis" dangerouslySetInnerHTML={{__html: body.html}}></p>
 
@@ -55,7 +53,7 @@ const BlogPostContent = ({post}) => {
                     <p>3 min.</p>
                 </div>
             </div>
-            
+            {videoOrBlog(videoToggle)}
             <div className="flex justify-between">
                 <div class="w-4/5 flex flex-col gap-2">
                     <div className="flex items-center gap-2">
