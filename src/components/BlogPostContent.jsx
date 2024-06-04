@@ -19,7 +19,8 @@ const BlogPostContent = ({post}) => {
             publishDate,
             image,
             videoLink,
-            videoToggle} = post
+            videoToggle,
+            watchTime} = post
 
     function videoOrBlog (videoToggle) {
         if (videoToggle) {
@@ -37,6 +38,21 @@ const BlogPostContent = ({post}) => {
         }
     }
     
+
+    function readTime () {
+        if (!body) {
+            return watchTime
+        } else {
+            let totalText = body.html
+        
+            const wordsPerMinute = 200;
+    
+            let words = totalText.trim().split(/\s+/).length;
+            const time = Math.ceil(words / wordsPerMinute)
+            return time
+        }
+    }
+
     // console.log(image[0])
     //<p className="h-8 text-ellipsis" dangerouslySetInnerHTML={{__html: body.html}}></p>
 
@@ -55,7 +71,7 @@ const BlogPostContent = ({post}) => {
                     </div>
                     <div className="flex items-center gap-2">
                         <PiClockFill className="w-6 h-6"/>
-                        <p>3 min.</p>
+                        <p>{readTime()} Minutes</p>
                     </div>
                 </div>
                 {videoOrBlog(videoToggle)}

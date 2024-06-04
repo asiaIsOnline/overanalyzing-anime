@@ -29,6 +29,7 @@ query moreBlogQuery($cursor: String!, $size: Int!) {
                     }
                 videoLink
                 videoToggle
+                watchTime
                 }
         }
         pageInfo {
