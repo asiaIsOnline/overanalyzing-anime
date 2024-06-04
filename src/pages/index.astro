@@ -1,7 +1,7 @@
 ---
 import { GraphQLClient } from "graphql-request";
 import PageLayout from '../layouts/PageLayout.astro';
-import BlogPost from '../components/BlogPost.astro';
+import BlogPostContent from "../components/BlogPostContent";
 import MoreBlogPosts from "../components/MoreBlogPosts";
 
 // New GraphQL client with Hygraph endpoint
@@ -100,12 +100,12 @@ const pageTitle = "Home"
 
 <PageLayout title={pageTitle}>
 	<section>
-		<ul class="flex flex-col gap-16">
+		<ul class="flex flex-col">
 			{
 			  pages.postsArray.map((posts: any) => {
 				return (
 					<li>
-						<BlogPost post={posts.posts}/>
+						<BlogPostContent post={posts.posts}/>
 					</li>
 				);
 			  })
