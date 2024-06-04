@@ -43,11 +43,11 @@ const BlogPostContent = ({post}) => {
     return (
         <>
             <div className="w-full max-w-screen-sm mx-auto mb-16 flex flex-col gap-2">
-                <a href={`/posts/${slug}`}><h2 className="text-3xl">{title}</h2></a>
+                <a href={`/posts/${slug}`}><h2 className="text-3xl font-bold">{title}</h2></a>
                 <div className="flex gap-4">
                     <div className="flex items-center gap-2">
                         <PiCalendarDotFill className="w-6 h-6"/>
-                        <p>{new Date(publishDate).toLocaleDateString('en-us', { month: "2-digit", day: "2-digit", year:"numeric"})}</p>
+                        <p>{new Date(publishDate).toLocaleDateString('en-us', { month: "long", day: "2-digit", year:"numeric"})}</p>
                     </div>
                     <div className="flex items-center gap-2">
                         <PiUserCircleFill className="w-6 h-6"/>

@@ -95,8 +95,8 @@ function MoreBlogPosts({currentCursor, size=4, HYGRAPH_ENDPOINT}) {
                 </div>
             ))}
 
-            {loading && <div className="bg-emerald-950 p-4 text-slate-200 text-center">Loading...</div>}
-            {hasNext && <button className="bg-emerald-950 p-4 text-slate-200 text-center" onClick={getMorePosts}>More Posts</button>}
+            {loading && <div className="text-emerald-950">Loading...</div>}
+            {hasNext && <button className="bg-emerald-950 p-4 text-slate-200 text-center" onClick={getMorePosts}>See Older Posts</button>}
         </>
     )
 }

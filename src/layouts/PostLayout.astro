@@ -20,7 +20,10 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<Header></Header>
-		<slot />
+		<main class="w-px-32 py-10 flex justify-evenly">
+			<slot />
+			<Sidebar></Sidebar>
+		</main>
 		<Footer></Footer>
 	</body>
 </html>

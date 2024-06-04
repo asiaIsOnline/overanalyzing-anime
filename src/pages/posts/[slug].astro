@@ -1,6 +1,7 @@
 ---
 import { GraphQLClient } from "graphql-request";
 import type { GetStaticPaths } from "astro";
+import { Icon } from 'astro-icon/components';
 import PostLayout from "../../layouts/PostLayout.astro";
 
 type Posts = {
@@ -18,14 +19,33 @@ export const getStaticPaths = (async () => {
 
     const allPostsQuery = `
     query AllPosts {
-            posts {
-                title
-                slug
-                body {
-                    html
+        posts {
+            title
+            slug
+            body {
+                html
+            }
+            likes
+            publishDate
+            postTags {
+                tagName
+            }
+            postAuthor {
+                postAuthor
+            }
+            postCategories {
+                categoryName
+            }
+            postComments {
+                commentBody
+                commentDate
+                commentLikes
+                commenter {
+                    commenterName
                 }
             }
-        }`
+        }
+    }`
 
 
     const {posts}: Posts = await client.request(allPostsQuery)
@@ -40,9 +60,47 @@ export const getStaticPaths = (async () => {
 
 const { post } = Astro.props
 
+function readTime () {
+    let totalText = post.body.html
+    
+    const wordsPerMinute = 200;
+
+    let words = totalText.trim().split(/\s+/).length;
+    const time = Math.ceil(words / wordsPerMinute)
+    return time
+}
+
 ---
 
 <PostLayout title={post.title}>
-    <h1>{post.title}</h1>
-    <div set:html={post.body.html}></div>
+    <section class="w-3/6 flex gap-6 flex-col">
+        <h1 class="text-3xl font-bold">{post.title}</h1>
+        <div class="flex gap-4">
+            <div class="flex gap-2">
+                <Icon class="w-6 h-6" name="ph:calendar-dots-fill" />
+                <p class="text-sm">{new Date (post.publishDate).toLocaleDateString('en-us', { month: "long", day: "2-digit", year:"numeric"})}</p>
+            </div>
+            <div class="flex gap-2">
+                <Icon class="w-6 h-6" name="ph:user-circle-fill" />
+                <p class="text-sm">{post.postAuthor.postAuthor}</p>
+            </div>
+            <div class="flex gap-2">
+                <Icon class="w-6 h-6" name="ph:clock-fill" />
+                <p class="text-sm">{readTime()} Minutes</p>
+            </div>
+        </div>
+        <div set:html={post.body.html}></div>
+        <div class="border-t-2">
+            <div>
+                <p>Share This Post</p>
+            </div>
+            <div>
+                <p>Like This Post</p>
+                <div>| {post.likes} Likes</div>
+            </div>
+        </div>
+        <div class="border-t-2">
+            <p>See more posts by {post.postAuthor.postAuthor}</p>
+        </div>
+    </section>
 </PostLayout>
