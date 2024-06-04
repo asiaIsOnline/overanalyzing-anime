@@ -1,4 +1,5 @@
 import { useState } from "react"
+import BlogPostContent from "./BlogPostContent"
 
 const moreBlogQuery = `
 query moreBlogQuery($cursor: String!, $size: Int!) {
@@ -44,28 +45,27 @@ function MoreBlogPosts({currentCursor, size=4, HYGRAPH_ENDPOINT}) {
     const [loading, setLoading] = useState(false)
 
     const getMorePosts = async () => {
-        
-        try {
-            setLoading(true)
+        setLoading(true)
             const response = await fetch(
                 HYGRAPH_ENDPOINT, 
                 {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        Accept: "application/json",
                     },
                     body: JSON.stringify({
                         query: moreBlogQuery, 
                         variables: {
                             size: size,
-                            cursor: currentCursor
+                            cursor: cursor
                         }
                     })
                 })
 
                 
             if (!response.ok) {
-                throw new Error("Issue obtaining response from Hygraph")
+                throw new Error("Issue obtaining response from CMS")
             }
 
             const data = await response.json();
@@ -73,30 +73,30 @@ function MoreBlogPosts({currentCursor, size=4, HYGRAPH_ENDPOINT}) {
             const { postsArray, pageInfo } = data.data.postsConnection
 
             setPosts([...posts, ...postsArray])
+            setCursor(pageInfo.endCursor)
+            setHasNext(pageInfo.hasNextPage)
+            setLoading(false)
 
-            console.log(postsArray)
+            if (posts.length == 0) {
+                console.log("The posts array is empty...")
+                console.log(posts)
+            } else {
+                console.log("There are posts.")
+                console.log(posts)
+            }
 
-        } catch (error) {
-            console.error(error.message);
-        } finally { 
-            setLoading(false);
-        }
     }
 
     return (
         <>
-            <h1>More Blog Content in Progress...</h1>
-            {
-            posts.map((posts) => {
-                <li key={posts.cursor}>
-
-                </li>
-                })
-            }
+            {posts.map((post) => (
+                <div key={post.cursor}>
+                    <BlogPostContent post={post.posts} />
+                </div>
+            ))}
 
             {loading && <div className="bg-emerald-950 p-4 text-slate-200 text-center">Loading...</div>}
             {hasNext && <button className="bg-emerald-950 p-4 text-slate-200 text-center" onClick={getMorePosts}>More Posts</button>}
-
         </>
     )
 }
