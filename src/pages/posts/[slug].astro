@@ -19,7 +19,7 @@ export const getStaticPaths = (async () => {
 
     const allPostsQuery = `
     query AllPosts {
-        posts {
+        posts(first: 200) {
             title
             slug
             body {
