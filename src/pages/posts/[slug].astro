@@ -1,5 +1,6 @@
 ---
 import { GraphQLClient } from "graphql-request";
+import { astToHtmlString } from "@graphcms/rich-text-html-renderer"
 import type { GetStaticPaths } from "astro";
 import { Icon } from 'astro-icon/components';
 import PostLayout from "../../layouts/PostLayout.astro";
@@ -24,6 +25,7 @@ export const getStaticPaths = (async () => {
             slug
             body {
                 html
+                json
             }
             likes
             publishDate
@@ -47,7 +49,6 @@ export const getStaticPaths = (async () => {
         }
     }`
 
-
     const {posts}: Posts = await client.request(allPostsQuery)
 
     return posts.map ( (post: any) => ({
@@ -60,6 +61,17 @@ export const getStaticPaths = (async () => {
 
 const { post } = Astro.props
 
+const renderers = {
+    p: ({children}) => `<p class="text-lg"></p>`
+}
+/*
+function addContent() {
+    const content = post.body.json.children;
+    const rendered = astToHtmlString({content: content, renderers})
+
+    return content
+}
+*/
 function readTime () {
         if (!post.body) {
             return post.watchTime
@@ -93,7 +105,8 @@ function readTime () {
                 <p class="text-sm">{readTime()} Minutes</p>
             </div>
         </div>
-        {post.body && <div set:html={post.body.html}></div>}
+        {/*post.body && <div set:html={post.body.html}></div>*/}
+        {/*console.log(addContent())*/}
         <div class="border-t-2">
             <div>
                 <p>Share This Post</p>
