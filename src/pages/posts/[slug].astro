@@ -89,7 +89,7 @@ function readTime () {
                 <p class="text-sm">{readTime()} Minutes</p>
             </div>
         </div>
-        <div set:html={post.body.html}></div>
+        {post.body && <div set:html={post.body.html}></div>}
         <div class="border-t-2">
             <div>
                 <p>Share This Post</p>

@@ -53,13 +53,25 @@ const BlogPostContent = ({post}) => {
         }
     }
 
+    function videoBlogCheck () {
+        if (!body) {
+            return (
+                <h2 className="text-3xl font-bold">{title}</h2>
+            )
+        } else {
+            return (
+                <a href={`/posts/${slug}`}><h2 className="text-3xl font-bold">{title}</h2></a>
+            )
+        }
+    }
+
     // console.log(image[0])
     //<p className="h-8 text-ellipsis" dangerouslySetInnerHTML={{__html: body.html}}></p>
 
     return (
         <>
             <div className="w-full max-w-screen-sm mx-auto mb-16 flex flex-col gap-2">
-                <a href={`/posts/${slug}`}><h2 className="text-3xl font-bold">{title}</h2></a>
+                {videoBlogCheck()}
                 <div className="flex gap-4">
                     <div className="flex items-center gap-2">
                         <PiCalendarDotFill className="w-6 h-6"/>
