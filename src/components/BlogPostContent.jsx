@@ -25,7 +25,7 @@ const BlogPostContent = ({post}) => {
     function videoOrBlog (videoToggle) {
         if (videoToggle) {
             return (
-                <iframe width="640" height="360" src={videoLink} title="YouTube video player" frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe> 
+                <iframe width="640" height="360" src={videoLink} title="YouTube video player" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe> 
             )         
         } else if (image[0] == undefined) {
             return (

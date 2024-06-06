@@ -52,7 +52,7 @@ type Posts = {
 //GraphQL query to fetch data
 const bookMusicQuery = `
 	query paginationQuery($size: Int) {
-		pages: postsConnection(first: $size, where: {postCategories_every: {categoryName: "Video Games"}}, orderBy: publishDate_DESC) {
+		pages: postsConnection(first: $size, where: {postCategories_every: {categoryName: "Books & Music"}}, orderBy: publishDate_DESC) {
 			postsArray: edges {
 				cursor
 				posts: node {
@@ -96,7 +96,7 @@ console.log(pages.postsArray.map((post) => {
 }))
 */
 
-const pageTitle = "Video Games"
+const pageTitle = "Books & Music"
 ---
 
 <PageLayout title={pageTitle}>

@@ -1,22 +1,120 @@
 ---
+import { GraphQLClient } from "graphql-request";
 import PageLayout from '../layouts/PageLayout.astro';
+import BlogPostContent from "../components/BlogPostContent";
+import MoreBlogPosts from "../components/MoreBlogPosts";
 
-const pageTitle="Anime & Manga"
+// New GraphQL client with Hygraph endpoint
+const client = new GraphQLClient(import.meta.env.HYGRAPH_ENDPOINT);
+
+// Define the number of posts loaded per page
+const pageSize = 8;
+
+// Declare Posts type
+type Pages = {
+	postsArray: {
+		cursor: string;
+		posts: Posts;
+	}[];
+	pageInfo: {
+		endCursor: string;
+		hasNextPage: boolean;
+	}
+}
+
+type Posts = {
+	posts: {
+		slug: string; 
+		title: string;
+		body?: {
+			text: string;
+		};
+		likes: number;
+		postAuthor: {
+			postAuthor: string;
+		}
+		postCategories: {
+			categoryName: string;
+		}
+		postTags: {
+			tagName: string;
+		}
+		publishDate: string;
+		image?: {
+			url: string | null;
+			altText: string | null;
+		}
+		videoLink: string;
+		videoToggle: boolean;
+	}[];
+};
+
+//GraphQL query to fetch data
+const animeMangaQuery = `
+	query paginationQuery($size: Int) {
+		pages: postsConnection(first: $size, where: {postCategories_every: {categoryName: "Anime & Manga"}}, orderBy: publishDate_DESC) {
+			postsArray: edges {
+				cursor
+				posts: node {
+					title
+					slug
+					body {
+						html
+						}
+					likes
+					postAuthor {
+						postAuthor
+						}
+					postCategories {
+						categoryName
+						}
+					postTags {
+						tagName
+						}
+					publishDate
+					image {
+						altText
+						url
+						}
+					videoLink
+					videoToggle
+					watchTime
+					}
+			}
+			pageInfo {
+				endCursor
+				hasNextPage
+			}
+		}
+	}`
+
+const { pages } : any = await client.request(animeMangaQuery, { size: pageSize })
+
+/*
+console.log(pages.postsArray.map((post) => {
+	return post.posts
+}))
+*/
+
+const pageTitle = "Anime & Manga"
 ---
 
-<PageLayout title={pageTitle} pageHeader={pageTitle}>
+<PageLayout title={pageTitle}>
 	<section>
-		<!--
-		<BlogPost 
-			title="Example Blog Post"
-			body="Lorem ipsum dolor sit amet consectetur. Pellentesque dictum turpis sed at egestas. Facilisis eget sed posuere nulla morbi amet neque odio orci. Purus enim volutpat sapien adipiscing..."
-			author="O.A."
-			category="Anime & Manga"
-			tag="Dragonball"
-			commentNumber={0}
-			likeNumber={0}
-		/>
-		 -->
+		<ul class="flex flex-col">
+			{
+			  pages.postsArray.map((posts: any) => {
+				return (
+					<li>
+						<BlogPostContent post={posts.posts}/>
+					</li>
+				);
+			  })
+			}
+		  </ul>
+
+		  {
+			pages.pageInfo.hasNextPage && <MoreBlogPosts client:visible currentCursor={pages.pageInfo.endCursor} size={pageSize} HYGRAPH_ENDPOINT={import.meta.env.HYGRAPH_ENDPOINT}/>
+		  }
 	</section>
 </PageLayout>
-
