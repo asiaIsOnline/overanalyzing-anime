@@ -61,14 +61,18 @@ export const getStaticPaths = (async () => {
 const { post } = Astro.props
 
 function readTime () {
-    let totalText = post.body.html
+        if (!post.body) {
+            return post.watchTime
+        } else {
+            let totalText = post.body.html
+        
+            const wordsPerMinute = 200;
     
-    const wordsPerMinute = 200;
-
-    let words = totalText.trim().split(/\s+/).length;
-    const time = Math.ceil(words / wordsPerMinute)
-    return time
-}
+            let words = totalText.trim().split(/\s+/).length;
+            const time = Math.ceil(words / wordsPerMinute)
+            return time
+        }
+    }
 
 ---
 
@@ -104,3 +108,9 @@ function readTime () {
         </div>
     </section>
 </PostLayout>
+
+<style>
+    img {
+        display: inline-block;
+    }
+</style>
